@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">bartender</string>
+    <string name="search_cocktails">Search Cocktails</string>
+
+</resources>
