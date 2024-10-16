@@ -35,7 +35,6 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun BartenderTheme(
-    // Removed the darkTheme toggle
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
