@@ -54,7 +54,6 @@ fun CocktailSearchScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Display results or error
         val cocktails by viewModel.cocktailList.collectAsState(initial = emptyList())
         val error by viewModel.error.collectAsState()
 
@@ -65,7 +64,6 @@ fun CocktailSearchScreen(
                 modifier = Modifier.padding(8.dp)
             )
         } else {
-            // Show the list of cocktails using LazyColumn for better performance
             LazyColumn(
                 contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
