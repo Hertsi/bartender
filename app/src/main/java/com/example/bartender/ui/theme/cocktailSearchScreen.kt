@@ -11,9 +11,13 @@ import com.example.bartender.viewmodel.CocktailViewModel
 import com.example.bartender.ui.theme.CocktailItem
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.ui.Alignment
+import androidx.navigation.NavController
 
 @Composable
 fun CocktailSearchScreen(
+    navController: NavController,  // Add navController as parameter
     modifier: Modifier = Modifier,
     viewModel: CocktailViewModel = hiltViewModel()
 ) {
@@ -52,12 +56,24 @@ fun CocktailSearchScreen(
             Text(text = "Random")
         }
 
+        Button(
+            onClick = {
+                navController.navigate("info")
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Go to Info")
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
         val cocktails by viewModel.cocktailList.collectAsState(initial = emptyList())
         val error by viewModel.error.collectAsState()
+        val isLoading by viewModel.loading.collectAsState()
 
-        if (error != null) {
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+        } else if (error != null) {
             Text(
                 text = "Error: $error",
                 color = androidx.compose.ui.graphics.Color.Red,

@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">bartender</string>
     <string name="search_cocktails">Search Cocktails</string>
+    <string name="random_button">Random</string>
+    <string name="search_button">Search</string>
+    <string name="error_message">Error: %1$s</string>
+    <string name="loading_message">Loading…</string>
+    <string name="instructions_label">Instructions:</string>
+    <string name="category_label">Category:</string>
+    <string name="glass_label">Glass:</string>
+    <string name="ingredients_label">Ingredients:</string>
+    <string name="info_screen_title">Info</string>
+    <string name="error_generic">Could not load data. Please try again.</string>
 
 </resources>

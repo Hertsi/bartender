@@ -1,12 +1,12 @@
 package com.example.bartender.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.bartender.repository.CocktailRepository
 import com.example.bartender.model.Cocktail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -30,21 +30,26 @@ class CocktailViewModel @Inject constructor(
             try {
                 val response = repository.searchCocktailByName(name)
                 _cocktailList.value = response.drinks ?: emptyList()
+                _error.value = null
                 _loading.value = false
             } catch (e: Exception) {
-                _error.value = "Error: ${e.message}"
+                _error.value = "Could not load data. Please try again."
+                Log.e("CocktailViewModel", "Error fetching cocktail data: ${e.message}")
                 _loading.value = false
             }
         }
     }
 
     fun getRandomCocktail() {
+        _loading.value = true
         viewModelScope.launch {
             try {
                 val response = repository.getRandomCocktail()
                 _cocktailList.value = response.drinks ?: emptyList()
+                _loading.value = false
             } catch (e: Exception) {
                 _error.value = "Error: ${e.message}"
+                _loading.value = false
             }
         }
     }
